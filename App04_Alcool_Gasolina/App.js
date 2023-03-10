@@ -23,7 +23,7 @@ class App extends Component {
     else if((this.state.n1 >= 0 || this.state.n1 <= 0) && (this.state.n2 >= 0 || this.state.n2 <= 0) && (this.state.n1 / this.state.n2) < 0.7){
       this.setState({ nome: 'Alcool é melhor: ' + r });
     }
-    else if((this.state.n1 >= 0 || this.state.n1 <= 0) && (this.state.n2 >= 0 || this.state.n2 <= 0) && (this.state.n1 / this.state.n2) > 0.7){
+    else if((this.state.n1 >= 0 || this.state.n1 <= 0) && (this.state.n2 >= 0 || this.state.n2 <= 0) && (this.state.n1 / this.state.n2) >= 0.7){
       this.setState({ nome: 'Gasolina é melhor: ' + r });
     }
     else{

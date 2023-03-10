@@ -21,10 +21,10 @@ class App extends Component {
       return;
     }
     else if((this.state.n1 >= 0 || this.state.n1 <= 0) && (this.state.n2 >= 0 || this.state.n2 <= 0) && (this.state.n1 / this.state.n2) < 0.7){
-      this.setState({ nome: 'Alcool é melhor: ' + r });
+      this.setState({ nome: 'Alcool é melhor'});
     }
     else if((this.state.n1 >= 0 || this.state.n1 <= 0) && (this.state.n2 >= 0 || this.state.n2 <= 0) && (this.state.n1 / this.state.n2) >= 0.7){
-      this.setState({ nome: 'Gasolina é melhor: ' + r });
+      this.setState({ nome: 'Gasolina é melhor'});
     }
     else{
       alert('Digite apenas números!');

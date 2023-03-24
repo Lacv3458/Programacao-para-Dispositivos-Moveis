@@ -6,7 +6,7 @@ class App extends Component{
   render(){
     return(
       <View style={styles.container}>
-      <Text style={styles.titulo}>Anuncio</Text>
+      <Text style={styles.titulo}>Vagas</Text>
         <ScrollView showsHorizontalScrollIndicator={false} style ={{borderWidth:3}}>
         <View style={styles.box1}>
         <Text style={styles.titulo_job}>Programador</Text>

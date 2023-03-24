@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, Switch} from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Switch,  ScrollView} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 
@@ -40,6 +40,7 @@ class App extends Component {
 
   render() {
     return (
+      <ScrollView>
       <View style={styles.area}>
         <Text style={styles.texto}> Abertura de conta </Text>
         <View style={{flexdirection: "row"}}>
@@ -62,7 +63,8 @@ class App extends Component {
           onChangeText={(valor) => this.setState({ n2: valor })}
         />
       </View>
-
+<View style={styles.area}>
+<Text style={styles_r.texto_r}> Sexo: </Text>
       <Picker
       selectedValue={this.state.sexo}
       onValueChange={ (itemValue, itemIndex) => this.setState({sexo: itemValue}) }
@@ -71,7 +73,10 @@ class App extends Component {
         <Picker.Item key={2} value={"Feminino"} label="Feminino" />
         <Picker.Item key={3} value={"Outro"} label="Outro" />
         </Picker>
+</View>
 
+<View style={styles.area}>
+<Text style={styles_r.texto_r}> Escolaridade: </Text>
       <Picker
       selectedValue={this.state.e}
       onValueChange={ (itemValue, itemIndex) => this.setState({e: itemValue}) }
@@ -80,7 +85,10 @@ class App extends Component {
         <Picker.Item key={5} value={"Ensino Medio"} label="Ensino Medio" />
         <Picker.Item key={6} value={"Ensino Superior"} label="Ensino Superior" />
         </Picker>
+</View>
 
+<View style={styles.area}>
+<Text style={styles_r.texto_r}> Limite: </Text>
       <Slider
       minimumValue={0}
       maximumValue={1000}
@@ -88,19 +96,20 @@ class App extends Component {
       value={this.state.valor}
       step={1}
       />
+      <Text style={{textAlign: 'center', fontSize: 30}}>
+      {this.state.valor.toFixed(0)}
+      </Text>
+</View>
 
+<View style={styles.area}>
+<Text style={styles_r.texto_r}> Brasileiro: </Text>
       <Switch 
       value={this.state.status}
       onValueChange={ (valorSwitch) => this.setState({status: valorSwitch})}
       />
+</View>
 
 
-      <Text style={{textAlign: 'center', fontSize: 30}}>
-      {this.state.valor.toFixed(0)}
-      </Text>
-       <Text style={{textAlign: 'center', fontSize:30}}>
-        {(this.state.status) ? "Ativo" : "Inativo"}
-      </Text>
 
 
 
@@ -113,6 +122,7 @@ class App extends Component {
         <Text style={styles_r.texto_r}> {this.state.form_v} </Text>
         <Text style={styles_r.texto_r}> {this.state.form_sw} </Text>
       </View>
+      </ScrollView>
     );
   }
 }

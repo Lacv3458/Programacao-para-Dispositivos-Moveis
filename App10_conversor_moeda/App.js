@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Button, Switch, ScrollView} from 'react-native';
 import { styles } from './styles';
 import {Picker} from '@react-native-picker/picker';
-import Slider from '@react-native-community/slider';
- 
+
 class App extends Component{
   constructor(props){
     super(props);

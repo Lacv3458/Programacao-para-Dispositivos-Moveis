@@ -1,66 +1,51 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      n1: '',
-      n2: '',
-      input: '',
-    };
+import React, { useState } from 'react';
+import { View, Text, Button, TextInput, StyleSheet} from 'react-native';
 
-    this.entrar = this.entrar.bind(this);
-  }
 
-  entrar() {
-    if (this.state.n1 === '' || this.state.n2 === '') {
-      alert('Digite dois numeros!');
-      return;
-    }
-    else if((this.state.n1 >= 0 || this.state.n1 <= 0) && (this.state.n2 >= 0 || this.state.n2 <= 0)){
-      this.setState({ nome: 'Resultado: ' + this.state.n1 * this.state.n2 });
+export default function App(){
+  const [n1, setN1] = useState('')
+  const [n2, setN2] = useState('')
+  const [r, setR] = useState()
+
+  function calcular() {
+    if(!n1.trim() || !n2.trim()){
+    setR('Digite dois numeros!')
+   
     }
     else{
-      alert('Digite apenas números!');
-      return;
+    setR(n1*n2)
     }
-    
   }
 
-  render() {
-    return (
-      <View style={styles.area}>
-        <Text style={styles.texto}> Multiplicador de Números </Text>
 
-        <TextInput
+  return(
+    <View style={{ marginTop: 20 }}>
+      <Text style={{fontSize: 28, textAlign: 'center'}}>
+        Multiplicar Números
+      </Text>
+
+      <TextInput
           style={styles.input}
           keyboardType="number-pad"
           placeholder="Digite o primeiro n°"
-          onChangeText={(valor) => this.setState({ n1: valor })}
-          value={this.state.myNumber}
-        />
-
-        <TextInput
-          type="number"
+          onChangeText={(valor) =>  setN1(valor)}
+      />
+            <TextInput
           style={styles.input}
           keyboardType="number-pad"
           placeholder="Digite o segundo n°"
-          onChangeText={(valor) => this.setState({ n2: valor })}
-        />
+          onChangeText={(valor) =>  setN2(valor)}
+      />
 
-        <Button title="Calcular" onPress={this.entrar} />
-
-        <Text style={styles.texto}> {this.state.nome} </Text>
-      </View>
-    );
-  }
+    <Button title="Calcular" onPress={calcular} />
+      
+    <Text style={styles.texto}> {r} </Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   input: {
     height: 45,
     borderWidth: 1,
@@ -75,4 +60,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+
+

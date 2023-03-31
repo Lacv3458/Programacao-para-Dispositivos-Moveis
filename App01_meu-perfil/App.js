@@ -1,57 +1,66 @@
-import React, { Component } from 'react';
-import { View, Text, Image} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Button, Image} from 'react-native';
 
 
-class App extends Component{
-  render(){
+export default function App(){
+  const [nome] = useState('Luan Alejandro Cardoso Vazquez Gil')
+  const [dtNascimento] = useState('24/08/2002')
+  const [idade] = useState(20)
+  const [escola] = useState('ETEC Aristóteles Ferreira')
+  const [experiencia] = useState('Nenhuma')
+  const [projetos] = useState('Desevolvimento de um jogo digital como trabalho de conclusão de curso na Etec')
 
+  return(
+    <View style={{ marginTop: 20 }}>
 
-    let nome = 'Luan Alejandro Cardoso Vazquez Gil';
+    <ImagemPerfil/>
+    <Text style={{ fontSize: 30 }}>{nome}</Text>
+    <Text style={{fontSize: 25}}>
+      Dados pessoais:
+    </Text>
+
+    <Text style={{fontSize: 15, margin: 10}}>
+         Data Nascimento: {dtNascimento}
+         {'\n'}
+         Idade: {idade}
+    </Text>
+
+    <Text style={{fontSize: 25}}>
+          Formação: 
+    </Text>
+    <Text style={{fontSize: 15, margin: 10}}>
+          {escola}
+    </Text>   
+
+    <Text style={{fontSize: 25}}>
+          Experiência:
+    </Text>
+    <Text style={{fontSize: 15, margin: 10}}>
+         {experiencia}
+    </Text>
+
+    <Text style={{fontSize: 25}}>
+          Projetos:
+    </Text>
+    <Text style={{fontSize: 15, margin: 10}}>
+         {projetos}
+    </Text>
+
+     
+    </View>
+  )
+}
+
+function ImagemPerfil() {  
     let img = 'https://media.licdn.com/dms/image/D4D03AQGTrM8gYbZeSQ/profile-displayphoto-shrink_200_200/0/1673553752381?e=1682553600&v=beta&t=zRBHMEMXzjFNJIimwduMuKaRgP6J5HRYdO0JZdKoOwE';
 
 
     return(
-      <View>
         <Image
-          source={{ uri: img }}
-          style={{ width: 300, height: 300}}
-        />
-
-
-      <Text style={{ fontSize: 30 }}>{nome}</Text>
-      <Text style={{fontSize: 25}}>
-          Dados pessoais:
-        </Text>
-      <Text style={{fontSize: 15, margin: 10}}>
-          Data Nascimento: 24/08/2002{'\n'}Idade: 20
-        </Text>
-
-      <Text style={{fontSize: 25}}>
-          Formação:
-        </Text>
-      <Text style={{fontSize: 15, margin: 10}}>
-          ETEC Aristóteles Ferreira
-        </Text>
-
-      <Text style={{fontSize: 25}}>
-          Experiência:
-        </Text>
-      <Text style={{fontSize: 15, margin: 10}}>
-         Nenhuma
-        </Text>
-       
-       <Text style={{fontSize: 25}}>
-          Projetos:
-        </Text>
-      <Text style={{fontSize: 15, margin: 10}}>
-          Desevolvimento de um jogo digital como trabalho de conclusão de curso na Etec
-        </Text>
-
-
-      </View>
+        source={{ uri: img }}
+        style={{ width: 300, height: 300}}
+      />
     )
-  }
 }
 
 
-export default App;

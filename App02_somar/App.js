@@ -1,50 +1,38 @@
-import React, { Component } from 'react';
+
+import React, { useState } from 'react';
 import { View, Text, Button} from 'react-native';
 
 
-class App extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      num: 0
-    };
+export default function App(){
+  const [contador, setContador] = useState(0)
 
-this.somar = this.somar.bind(this);
-this.subtrair = this.subtrair.bind(this);
+
+  function mais() {
+    setContador(contador+1)
   }
-  
-  somar(){
-    this.setState({
-      num: this.state.num + 1
-    });
-  }
-  subtrair(numero){
-    if(numero>0){
-    this.setState({
-     
-      num: this.state.num - 1
-      
-    });
-    };
+  function menos() {
+    if(contador>0)
+    {
+    setContador(contador-1)
+    }
+    
   }
 
 
-  render(){
-    return(
-      <View style={{ marginTop: 20 }}>
-        <Text style={{fontSize: 28, textAlign: 'center'}}>
+  return(
+    <View style={{ marginTop: 20 }}>
+      <Text style={{fontSize: 28, textAlign: 'center'}}>
         Contador de Pessoas
-        </Text>
-          <Text style={{fontSize: 100, color: 'red', textAlign: 'center'}}>
-          {this.state.num} 
-        </Text>
-        <Button title="+" color="green" onPress={() => this.somar()}  />
-        <Button title="-" color="red" onPress={() => this.subtrair(this.state.num)} />
+      </Text>
 
-      </View>
-    )
-  }
+      <Text style={{fontSize: 100, color: 'red', textAlign: 'center'}}>
+        {contador}
+      </Text>
+
+      <Button color= "green" title="+" onPress={mais} />
+      <Button color= "red" title="-" onPress={menos} />
+
+    </View>
+  )
 }
 
-
-export default App;

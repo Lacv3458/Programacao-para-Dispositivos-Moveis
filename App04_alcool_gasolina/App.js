@@ -3,31 +3,19 @@ import { View, Text, Button, Image, TextInput, StyleSheet} from 'react-native';
 
 
 export default function App(){
-  const [peso, setPeso] = useState('')
-  const [altura, setAltura] = useState('')
+  const [gasolina, setGasolina] = useState('')
+  const [alcool, setAlcool] = useState('')
   const [r, setR] = useState()
 
   function verificar() {
-  if(!peso.trim() || !altura.trim()){
+  if(!gasolina.trim() || !alcool.trim()){
     setR('Digite dois numeros!')
    }
-  else if(peso/(altura*altura) < 18.5){
-    setR('Abaixo do peso')
-  } 
-  else if(peso/(altura*altura) >= 18.6 && peso/(altura*altura) < 24.9){
-    setR('Peso ideal')
+  else if(gasolina/alcool <= 0.7){
+    setR('O derivado da cana-de-açúcar é o melhor ')
   }
-  else if(peso/(altura*altura) >= 25 && peso/(altura*altura) < 29.9){
-    setR('Levemente acima do peso')
-  }
-  else if(peso/(altura*altura)  >= 30 && peso/(altura*altura) < 34.9){
-    setR('Obesidade grau 1')
-  }
-  else if(peso/(altura*altura) >= 35 && peso/(altura*altura) < 39.9){
-    setR('Obesidade grau 2 (severa)')
-  }
-  else{
-    setR('Obesidade grau 3 (mórbida)')
+  else if(gasolina/alcool > 0.7){
+    setR('Gasolina é melhor ')
   }
   }
 
@@ -35,7 +23,7 @@ export default function App(){
   return(
     <View style={{ marginTop: 20 }}>
       <Text style={{fontSize: 28, color: 'red', textAlign: 'center'}}>
-        IMC
+        Alcool ou Gasolina
       </Text>
     
     <Imagem />
@@ -43,14 +31,14 @@ export default function App(){
     <TextInput
           style={styles.input}
           keyboardType="number-pad"
-          placeholder="Peso"
-          onChangeText={(valor) =>  setPeso(valor)}
+          placeholder="Preço Alcool"
+          onChangeText={(valor) =>  setAlcool(valor)}
       />
             <TextInput
           style={styles.input}
           keyboardType="number-pad"
-          placeholder="Altura"
-          onChangeText={(valor) =>  setAltura(valor)}
+          placeholder="Preço Gasolina"
+          onChangeText={(valor) =>  setGasolina(valor)}
       />
 
       <Button title="Verificar" onPress={verificar} />
@@ -67,13 +55,13 @@ export default function App(){
 }
 
 function Imagem() {  
-    let img = 'https://emagreceja.com.br/wp-content/uploads/2023/03/tabela-imc.png';
+    let img = 'https://calculocerto.com/wp-content/uploads/2019/11/gasolina-alcool-calculadora.png';
 
 
     return(
         <Image
         source={{ uri: img }}
-         style={{width: 300, height: 200, marginTop: 10, margin: 15}}
+        style={{width: 200, height: 150, marginTop: 10, margin: 65}}
       />
     )
 }

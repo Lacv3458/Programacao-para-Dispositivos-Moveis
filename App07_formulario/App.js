@@ -108,8 +108,9 @@ export default function App(){
     </View>
 
     <Button title="Confirmar" onPress={entrar}/>
-    <Text style={styles_r.texto_r}> {formNome} </Text>
     <Text style={styles_r.texto_r}> Dados Informados: </Text>
+    
+        <Text style={styles_r.texto_r}> {formNome} </Text>
         <Text style={styles_r.texto_r}> {formIdade} </Text>
         <Text style={styles_r.texto_r}> {formSexo} </Text>
         <Text style={styles_r.texto_r}> {formEscolaridade} </Text>

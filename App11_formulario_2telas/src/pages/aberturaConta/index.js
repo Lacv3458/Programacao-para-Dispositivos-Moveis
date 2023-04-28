@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Button, Text, Switch, TextInput, StyleSheet, ScrollView, Picker} from 'react-native';
+import { View, Button, Text, Switch, TextInput, StyleSheet, ScrollView} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 

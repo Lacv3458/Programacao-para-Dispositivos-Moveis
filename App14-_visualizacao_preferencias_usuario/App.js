@@ -9,7 +9,7 @@ export default function App(){
 
   const [capslk, setCapslk] = useState(false)
   const [noturno, setNortuno] = useState(false)
-  const [modo, setModo] = useState(false)
+  
 
 
  useEffect( () => {
@@ -23,55 +23,29 @@ export default function App(){
   }, []);
 
 
-  const gravaModo = async () => {
-    setModo(input)
-    await AsyncStorage.setItem('modo', input);
-    Keyboard.dismiss();
-    alert('Salvo com sucesso!');
+  useEffect(() => {
+    getData();
+    //alert('Abriu o App');
+  }, []);
+
+  useEffect(() => {
+    //alert('Alterou os valores');
+    setData();
+  }, [capslk, noturno]);
+
+  async function setData() {
+    await AsyncStorage.setItem('dia', String(noturno));
+    await AsyncStorage.setItem('pequeno', String(capslk));
   }
 
+  async function getData() {
+    const dia = await AsyncStorage.getItem('dia');
+    const pequeno = await AsyncStorage.getItem('pequeno');
 
-function CaixaDeTexto() {
-    if(noturno == true && capslk == false){
-    return(
-  
-         <View style={styles.box2}>
-        <Text style={styles.noite1}>A vigança nunca é plena, mata a alma e a envenena</Text>
+    setNortuno(dia === 'true' && true);
+    setCapslk(pequeno === 'true' && true);
+  }
 
-        </View>
-    
-    ) }
-    if(noturno == true && capslk == true){
-    return(
-  
-         <View style={styles.box2}>
-        <Text style={styles.noite2}>A vigança nunca é plena, mata a alma e a envenena</Text>
-
-        </View>
-    
-    ) }
-    if(noturno == false && capslk == true){
-    return(
-  
-         <View style={styles.box1}>
-        <Text style={styles.dia2}>A vigança nunca é plena, mata a alma e a envenena</Text>
-
-        </View>
-    
-    ) }
-        if(noturno == false && capslk == false){
-    return(
-  
-         <View style={styles.box1}>
-        <Text style={styles.dia1}>A vigança nunca é plena, mata a alma e a envenena</Text>
-
-        </View>
-    
-    ) }
-    
-    
-    
-}
 
   return(
     <ScrollView>
@@ -83,7 +57,7 @@ function CaixaDeTexto() {
 
   
     <View style={styles.area}>
-      <Text style={styles_r.texto_r}> Aumentar Fonte: </Text>
+      <Text style={styles_r.texto_r}> Aumentar Fonte: </Text> 
       <Switch 
       value={capslk}
       onValueChange={ (valorSwitch) => setCapslk(valorSwitch)}
@@ -95,8 +69,12 @@ function CaixaDeTexto() {
       onValueChange={ (valorSwitch) => setNortuno(valorSwitch) }
       />  
     </View>
-    <CaixaDeTexto/>
-    
+
+    <View style={[styles.box, noturno && styles["bg-light"]]}>
+        <Text style={[styles.boxText, noturno && styles["text-dark"], capslk && styles.big]}>
+          A vingança nunca é plena, mata a alma e envenena!
+        </Text>
+      </View>
      
 
 
@@ -107,43 +85,29 @@ function CaixaDeTexto() {
 
 
 const styles = StyleSheet.create({
-  box1:{
-      borderWidth:3,
-      width: 320,
-      height: 230,
-      alignSelf: 'center',
-      resizeMode: 'contain'
+ switch: {
+    transform: [{ scale: 1.5 }]
   },
-  box2:{
-      borderWidth:3,
-      width: 320,
-      height: 230,
-      alignSelf: 'center',
-      resizeMode: 'contain',
-      backgroundColor: 'black'
+  "bg-light": {
+    backgroundColor: "#fff"
   },
-  dia1:{
-      margin: 5,
-      fontSize: 20,
-      marginLeft: 15,
-    },
-    dia2:{
-      margin: 5,
-      fontSize: 40,
-      marginLeft: 15,
-    },
-    noite1:{
-      margin: 5,
-      fontSize: 20,
-      marginLeft: 15,
-      color: 'white'
-    },
-    noite2:{
-      margin: 5,
-      fontSize: 40,
-      marginLeft: 15,
-      color: 'white'
-    }
+  "text-dark": {
+    color: "#000"
+  },
+  box: {
+    padding: 16,
+    borderColor: "#000",
+    borderWidth: 1,
+    backgroundColor: "#000",
+    flex: 1
+  },
+  boxText: {
+    color: "#fff",
+    fontSize: 22,
+  },
+  big: {
+    fontSize: 32
+  }
 
 });
 

@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StatusBar, TextInput, Button, FlatList, TouchableOpacity} from "react-native";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
+import { View, Text, StatusBar, TextInput, Button, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 
-// Para React Native CLI
-// import { openDatabase } from "react-native-sqlite-storage";
-
-
-// Para Expo
 import * as SQLite from 'expo-sqlite';
 
-
-// Para React Native CLI
-// const db = openDatabase({
-  // name: "rn_sqlite",
-// });
-
-
-// Para Expo
 const db = SQLite.openDatabase("tarefas.db");
 
 
@@ -66,37 +51,6 @@ const App = () => {
   };
 
 
-const excluirTarefa = (id) => {
-
-    db.transaction(txn => {
-
-      txn.executeSql(
-
-        `DELETE FROM tarefas WHERE id = ?`,
-
-        [id],
-
-        (sqlTxn, res) => {
-
-          console.log(`${tarefa} Tarefa removida com sucesso!`);
-
-          getTarefas();
-
-        },
-
-        error => {
-
-          console.log("Erro ao remover uma Tarefa " + error.message);
-
-        },
-
-      );
-
-    });
-
-  };
-
-
   const getTarefas = () => {
     db.transaction(txn => {
       txn.executeSql(
@@ -107,7 +61,7 @@ const excluirTarefa = (id) => {
           let len = res.rows.length;
 
 
-          if (len >= 0) {
+          if (len > 0) {
             let results = [];
             for (let i = 0; i < len; i++) {
               let item = res.rows.item(i);
@@ -125,40 +79,40 @@ const excluirTarefa = (id) => {
     });
   };
 
+  const excluirTarefa = (id) => {
+    db.transaction(txn => {
+      txn.executeSql(
+        `DELETE FROM tarefas WHERE id = ?`,
+        [id],
+        (sqlTxn, res) => {
+          console.log(`${tarefa} Tarefa excluída com sucesso!`);
+          getTarefas();
+        },
+        error => {
+          console.log("Erro ao excluir uma Tarefa " + error.message);
+        },
+      );
+    });
+  }
+
 
   const renderTarefa = ({ item }) => {
-
-    return (
-
-      <View style={{
-
-        flexDirection: "row",
-
-        paddingVertical: 12,
-
-        paddingHorizontal: 10,
-
-        borderBottomWidth: 1,
-
-        borderColor: "#ddd",
-
-      }}>
-
-        <Text style={{ marginRight: 9 }}>{item.id}></Text>
-
-        <Text>{item.nome}</Text>
-
-          <TouchableOpacity onPress={() => excluirTarefa(item.id)}>
-
-            <FontAwesome name='minus' size={23} color='black' />
-
-          </TouchableOpacity>
-
-      </View>
-
-    );
-
-  };
+    return (
+      <View style={{
+        flexDirection: "row",
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        borderColor: "#ddd",
+      }}>
+        <Text style={{ marginRight: 9 }}>{item.id}</Text>
+        <Text>{item.nome}</Text>
+        <TouchableOpacity onPress={() => excluirTarefa(item.id)}>
+          <Text style={styles.botao}>Excluir</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
 
   useEffect(async () => {
@@ -192,6 +146,15 @@ const excluirTarefa = (id) => {
   );
 };
 
+const styles = StyleSheet.create({
+  botao:{
+    backgroundColor: '#222',
+    color: '#FFF',
+    height: 30,
+    padding: 5,
+    marginLeft: 4,
+  }
+});
+
 
 export default App;
-
